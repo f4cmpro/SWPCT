@@ -227,7 +227,53 @@ for ((k, v) in m) { ... }
 
 ---
 
-## 12. String Template (nội suy chuỗi)
+## 12. Tách chuỗi (Split String)
+
+| C++ | Kotlin |
+|---|---|
+| `stringstream ss(s); string tok; while(ss >> tok)` | `s.split(" ")` |
+| `stringstream` với delimiter tùy chỉnh | `s.split(",")` |
+| `s.substr(pos, len)` | `s.substring(pos, pos + len)` |
+| `s.find(delim)` + vòng lặp thủ công | `s.split(delim)` trả về `List<String>` |
+
+```cpp
+// C++ — tách theo khoảng trắng
+#include <sstream>
+string s = "1 2 3";
+stringstream ss(s);
+string tok;
+while (ss >> tok) {
+    // xử lý tok
+}
+
+// C++ — tách theo delimiter tùy chỉnh
+string s = "a,b,c";
+stringstream ss(s);
+string tok;
+while (getline(ss, tok, ',')) {
+    // xử lý tok
+}
+```
+```kotlin
+// Kotlin — tách theo khoảng trắng
+val parts = "1 2 3".split(" ")          // ["1", "2", "3"]
+
+// Kotlin — tách theo delimiter tùy chỉnh
+val parts = "a,b,c".split(",")          // ["a", "b", "c"]
+
+// Tách và chuyển kiểu ngay
+val nums = "1 2 3".split(" ").map { it.toInt() }   // [1, 2, 3]
+
+// Tách với nhiều delimiter
+val parts = "a b,c".split(" ", ",")    // ["a", "b", "c"]
+
+// Tách với regex
+val parts = "a  b   c".split(Regex("\\s+"))  // ["a", "b", "c"]
+```
+
+---
+
+## 13. String Template (nội suy chuỗi)
 
 ```cpp
 // C++
@@ -245,7 +291,7 @@ val t = "Tên: $name"
 
 ---
 
-## 13. Include headers trong C++
+## 14. Include headers trong C++
 
 ### Kiểu dữ liệu cơ bản & I/O
 ```cpp
